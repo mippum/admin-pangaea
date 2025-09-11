@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  react-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # 개발 모드에서는 3000번 포트
+    volumes:
+      - .:/app  # 코드 변경 시 자동 반영
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # 파일 시스템 감지 기능 활성화
+    networks:
+      - react-network

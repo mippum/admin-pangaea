@@ -43,8 +43,7 @@ const httpClient = (url: string, options: any = {}) => {
 };
 
 const dataProvider: DataProvider = {
-  getList: async (resource, params) => {
-    console.log(params);
+  getList: async (resource, _params) => {
     const action = "getList";
     const map = pathMap[resource]?.[action];
     if (!map) throw new Error(`No pathMap entry for ${resource} / ${action}`);
@@ -104,7 +103,7 @@ const dataProvider: DataProvider = {
   getManyReference: async (_resource, _params) => {
     return { data: [], total: 0 };
   },
-  updateMany: async (_, params) => {
+  updateMany: async (_resource, _params) => {
     return { data: [] };
   },
 };
