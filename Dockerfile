@@ -1,16 +1,21 @@
-# 1. Node.js 이미지를 기반으로 시작
-FROM node:16 AS development
+# 1. Build stage
+FROM node:20 AS builder
 
 WORKDIR /app
-
-# 2. 의존성 파일 복사
 COPY package.json package-lock.json ./
-
-# 3. 의존성 설치
 RUN npm install
-
-# 4. 소스 파일 복사
 COPY . .
+RUN npm run build
 
-# 5. 개발 서버 실행 (react-scripts start)
-CMD ["npm", "start"]
+# 2. Production stage (Nginx)
+FROM nginx:alpine
+
+# 빌드 결과물 복사
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Nginx 포트 3000으로 변경
+RUN sed -i 's/listen       80;/listen 3000;/g' /etc/nginx/conf.d/default.conf
+
+EXPOSE 3000
+
+CMD ["nginx", "-g", "daemon off;"]
