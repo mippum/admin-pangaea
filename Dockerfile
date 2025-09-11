@@ -11,10 +11,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # 빌드 결과물 복사
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Nginx 포트 3000으로 변경
-RUN sed -i 's/listen       80;/listen 3000;/g' /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 3000
 
