@@ -1,6 +1,6 @@
 import { fetchUtils, DataProvider } from "react-admin";
 
-const apiUrl = "http://localhost:8000";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const pathMap: Record<
   string,

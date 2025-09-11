@@ -1,7 +1,6 @@
 import { AuthProvider } from "react-admin";
 
-const apiUrl = "http://local.mippum.com:8000";
-// const apiUrl = "http://localhost:8000";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
