@@ -5,11 +5,12 @@ import AdminAccountEdit from "./admin-accounts/AdminAccountEdit.tsx";
 import AdminAccountList from "./admin-accounts/AdminAccountList.tsx";
 import AdminAccountCreate from "./admin-accounts/AdminAccountCreate.tsx";
 import CustomPage from "./pages/CustomPage.tsx";
-import { Route, BrowserRouter as Router } from "react-router";
+import { Route } from "react-router";
 import { Layout } from "./Layout.tsx";
+import { HashRouter } from "react-router-dom";
 
 const App = () => (
-  <Router>
+  <HashRouter>
     <Admin
       dataProvider={dataProvider}
       authProvider={authProvider}
@@ -26,7 +27,7 @@ const App = () => (
         <Route path="/custom-page" element={<CustomPage />} />
       </CustomRoutes>
     </Admin>
-  </Router>
+  </HashRouter>
 );
 
 export default App;
